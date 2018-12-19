@@ -12,7 +12,8 @@ abstract class Model{
     public function __construct(){
         try{
             require "config/sql.php";
-            $this->db = new mysqli(localhost, po, passwd, po);
+
+            $this->db = new mysqli($host, $username, $password, $dbname);
         }
         catch (Exception $e){
             print_r($e);
@@ -58,5 +59,12 @@ abstract class Model{
         $select = mysqli_query($this->db, $query);
 
         return $select;
+    }
+
+    public function insert($into, $columns, $values){
+        $query = 'INSERT INTO ' . $into . ' ';
+        $query .= '('.$columns.') ';
+        $query .= 'VALUES (' . $values . ');';
+        mysqli_query($this->db, $query);
     }
 }

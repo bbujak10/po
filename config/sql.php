@@ -7,6 +7,7 @@
  */
 
 $host = 'localhost';
-$username = 'po';
-$password = 'passwd';
+$username = 'root';
+$password = '';
 $dbname = 'po';
+

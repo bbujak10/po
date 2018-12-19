@@ -7,6 +7,7 @@
  */
 
 abstract class View{
+    protected $keys;
     public function loadModel($name, $path='model/'){
         $src = $path.$name.".php";
         $name = $name."Model";
@@ -44,9 +45,9 @@ abstract class View{
     }
 
     public function set($name, $value){
-        $this->$name = $value;
+        $this->keys[$name] = $value;
     }
     public function get($name){
-        return $this->$name;
+        return $this->keys[$name];
     }
 }

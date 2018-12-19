@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,11 +10,11 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="res/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
-    <link href="css/mdb.min.css" rel="stylesheet">
+    <link href="res/css/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="style.css" rel="stylesheet">
+    <link href="res/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
 </head>
 
@@ -27,11 +28,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="indexDisplay.html.php">Przeglądaj rezerwacje <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?task=display">Przeglądaj rezerwacje <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="rezerwuj-1.html">Rezerwuj kort</a>
+                    <a class="nav-link" href="index.php?task=make">Rezerwuj kort</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Edytuj rezerwacje</a>
@@ -39,7 +40,7 @@
             </ul>
             <ul class="navbar-nav nav-flex-icons">
                 <li class="nav-item">
-                    <a class="nav-link">Niezalogowany <i class="fa fa-user"></i></a>
+                    <a href="index.php?task=login" class="nav-link"><?php if(isset($_SESSION['uid'])) echo $_SESSION['username']; else echo "Niezalogowany"; ?> <i class="fa fa-user"></i></a>
                 </li>
             </ul>
         </div>
@@ -47,7 +48,7 @@
 </header>
 
 <div class="container mt-3 pt-5">
-    <h5> Rezerwacje w dniu dd.mm.yyyy</h5>
+    <h5> Rezerwacje w dniu <?php echo $this->get('date'); ?></h5>
     <div class="cd-schedule loading">
         <div class="timeline">
             <ul>
@@ -85,97 +86,58 @@
             <ul>
                 <li class="events-group">
                     <div class="top-info"><span>Kort 1</span></div>
-
                     <ul>
-                        <li class="single-event" data-start="09:30" data-end="10:30"   data-event="event-1">
-                            <a href="">
-                                <em class="event-name">Rezerwacja</em>
-                            </a>
-                        </li>
-
-                        <li class="single-event" data-start="11:00" data-end="12:30"  data-event="event-1">
-                            <a href="#0">
-                                <em class="event-name">Rezerwacja</em>
-                            </a>
-                        </li>
-
-                        <li class="single-event" data-start="14:00" data-end="15:00"   data-event="event-1">
-                            <a href="#0">
-                                <em class="event-name">Rezerwacja</em>
-                            </a>
-                        </li>
-
-                        <li class="single-event" data-start="19:00" data-end="20:00"   data-event="event-1">
-                            <a href="#0">
-                                <em class="event-name">Rezerwacja</em>
-                            </a>
-                        </li>
+                        <?php
+                        foreach ($this->get('rezData') as $row){
+                            if($row['nr_kortu'] == 1){
+                                ?>
+                                <li class="single-event" data-start="<?php echo $row['godz_od']; ?>" data-end="<?php echo $row['godz_do']; ?>" data-event="event-1">
+                                    <a href="#0">
+                                        <em class="event-name">Rezerwacja</em>
+                                    </a>
+                                </li>
+                                <?php
+                            }
+                        }
+                        ?>
                     </ul>
                 </li>
 
                 <li class="events-group">
                     <div class="top-info"><span>Kort 2</span></div>
-
                     <ul>
-                        <li class="single-event" data-start="10:00" data-end="11:00"   data-event="event-1">
-                            <a href="#0">
-                                <em class="event-name">Rezerwacja</em>
-                            </a>
-                        </li>
-
-                        <li class="single-event" data-start="11:30" data-end="13:00"   data-event="event-1">
-                            <a href="#0">
-                                <em class="event-name">Rezerwacja</em>
-                            </a>
-                        </li>
-
-                        <li class="single-event" data-start="13:30" data-end="15:00"  data-event="event-1">
-                            <a href="#0">
-                                <em class="event-name">Rezerwacja</em>
-                            </a>
-                        </li>
-
-                        <li class="single-event" data-start="15:30" data-end="16:30"   data-event="event-1">
-                            <a href="#0">
-                                <em class="event-name">Rezerwacja</em>
-                            </a>
-                        </li>
+                        <?php
+                        foreach ($this->get('rezData') as $row){
+                            if($row['nr_kortu'] == 2){
+                                ?>
+                                <li class="single-event" data-start="<?php echo $row['godz_od']; ?>" data-end="<?php echo $row['godz_do']; ?>" data-event="event-1">
+                                    <a href="#0">
+                                        <em class="event-name">Rezerwacja</em>
+                                    </a>
+                                </li>
+                                <?php
+                            }
+                        }
+                        ?>
                     </ul>
                 </li>
 
                 <li class="events-group">
                     <div class="top-info"><span>Kort 3</span></div>
-
                     <ul>
-                        <li class="single-event" data-start="09:00" data-end="10:00"  data-event="event-1">
-                            <a href="#0">
-                                <em class="event-name">Rezerwacja</em>
-                            </a>
-                        </li>
-
-                        <li class="single-event" data-start="10:30" data-end="11:30"  data-event="event-1">
-                            <a href="#0">
-                                <em class="event-name">Rezerwacja</em>
-                            </a>
-                        </li>
-
-                        <li class="single-event" data-start="12:00" data-end="13:30"   data-event="event-1">
-                            <a href="#0">
-                                <em class="event-name">Rezerwacja</em>
-                            </a>
-                        </li>
-
-                        <li class="single-event" data-start="13:30" data-end="15:00"  data-event="event-1">
-                            <a href="#0">
-                                <em class="event-name">Rezerwacja</em>
-                            </a>
-                        </li>
-
-                        <li class="single-event" data-start="18:00" data-end="20:00"   data-event="event-1">
-                            <a href="#0">
-                                <em class="event-name">Rezerwacja</em>
-                            </a>
-                        </li>
+                        <?php
+                        foreach ($this->get('rezData') as $row){
+                            if($row['nr_kortu'] == 3){
+                                ?>
+                                <li class="single-event" data-start="<?php echo $row['godz_od']; ?>" data-end="<?php echo $row['godz_do']; ?>" data-event="event-1">
+                                    <a href="#0">
+                                        <em class="event-name">Rezerwacja</em>
+                                    </a>
+                                </li>
+                                <?php
+                            }
+                        }
+                        ?>
                     </ul>
                 </li>
             </ul>
@@ -205,15 +167,15 @@
 
 <!-- SCRIPTS -->
 <!-- JQuery -->
-<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="res/js/jquery-3.3.1.min.js"></script>
 <!-- Bootstrap tooltips -->
-<script type="text/javascript" src="js/popper.min.js"></script>
+<script type="text/javascript" src="res/js/popper.min.js"></script>
 <!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="res/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
-<script type="text/javascript" src="js/mdb.min.js"></script>
-<script src="js/modernizr.js"></script>
-<script src="main.js"></script>
+<script type="text/javascript" src="res/js/mdb.min.js"></script>
+<script src="res/js/modernizr.js"></script>
+<script src="res/main.js"></script>
 </body>
 
 </html>
