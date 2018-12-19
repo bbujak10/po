@@ -1,0 +1,47 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: bartoszbujak
+ * Date: 18/12/2018
+ * Time: 16:50
+ */
+require_once "controller/controller.php";
+
+class MakeController extends Controller {
+    public function index(){
+        $view = $this->loadView('make');
+        if(isset($_POST['court'])){
+            if(isset($_POST['coach'])){
+                if(isset($_POST['payment'])){
+                    $resModel = $this->loadModel('reservations');
+                    if($resModel->detectConflict($_POST['court'], $_POST['date'], $_POST['timeFrom'], $_POST['timeTo']) == -1){
+                        die("conflict detected");
+                    }
+                    else{
+                        if($_POST['coach'] != 0){
+                            if($resModel->detectCoachConflict($_POST['date'], $_POST['timeFrom'], $_POST['timeTo'], $_POST['coachSelect']) == -1){
+                                die("conflict detected");
+                            }
+                            else{
+                                $resModel->addNew($_POST['court'], $_POST['date'], $_POST['timeFrom'], $_POST['timeTo'], $_POST['coachSelect']);
+                            }
+                        }
+                        else{
+                            $resModel->addNew($_POST['court'], $_POST['date'], $_POST['timeFrom'], $_POST['timeTo']);
+                        }
+                    }
+                   $view->index(4);
+                }
+                else{
+                    $view->index(3);
+                }
+            }
+            else{
+                $view->index(2);
+            }
+        }
+        else{
+            $view->index(1);
+        }
+    }
+}
