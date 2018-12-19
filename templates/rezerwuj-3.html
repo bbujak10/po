@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>System rezerwacji kortów</title>
+    <!-- Font Awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="style.css" rel="stylesheet">
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark blue scrolling-navbar">
+            <a class="navbar-brand" href="#">SYSTEM REZERWACJI KORTÓW</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="indexDisplay.html.php">Przeglądaj rezerwacje <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="rezerwuj-1.html">Rezerwuj kort</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Edytuj rezerwacje</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav nav-flex-icons">
+                    <li class="nav-item">
+                        <a class="nav-link">Niezalogowany <i class="fa fa-user"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container page-content">
+        <h3>Rezerwuj kort</h3>
+        <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+        <form action="rezerwuj-4.html" role="form" name="paymentForm">
+            <label class="col-md-2 control-label lab-pd-0 mt-5">Podsumowanie:</label>
+            Lorem ipsum
+            <label class="col-md-2 control-label lab-pd-0 mt-5">Płatność za rezerwacje:</label>
+            <div class="container">
+                <button class="btn btn-light-blue active btn-block my-4 waves-effect btn-payment" type="submit" disabled>Zapłać teraz</button>
+            </div>
+            <div class="container">
+                <button class="btn btn-outline-primary waves-effect btn-payment" type="submit">Zapłać później</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script src="main.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datetimepicker-pllang.js"></script>
+    <script type="text/javascript">
+        $('.form_date').datetimepicker({
+            language:    'pl',
+            weekStart: 1,
+            todayBtn:    1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+
+        $('input[type="radio"]').on('click change', function(e) {
+            if($("#option1").is(":checked")){
+                $('#coachChoice').prop('disabled', false);
+            }
+            else{
+                $('#coachChoice').prop('disabled', 'disabled');
+            }
+        });
+    </script>
+</body>
+
+</html>
