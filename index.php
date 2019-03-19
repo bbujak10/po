@@ -5,6 +5,9 @@ include "controller/make.php";
 include "controller/check.php";
 include "controller/login.php";
 
+if(!isset($_GET['task'])){
+    header("Location: index.php?task=display");
+}
 if($_GET['task'] == 'display'){
     $ob = new DisplayController();
     if(isset($_GET['date'])){

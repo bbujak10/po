@@ -28,7 +28,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="index.php?task=display">Przeglądaj rezerwacje <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
@@ -48,7 +48,19 @@
 </header>
 
 <div class="container mt-3 pt-5">
-    <h5> Rezerwacje w dniu <?php echo $this->get('date'); ?></h5>
+    <div class="row">
+        <div class="col-sm-9">
+            <h5> Rezerwacje w dniu <span id="id="currentDate""><?php echo $this->get('date'); ?></span></h5>
+        </div>
+        <div class="col-sm">
+            <div class="input-group mb-3">
+                <input type="text" id="inputDate" value="<?php echo $this->get('date'); ?>" class="form-control" placeholder="<?php echo $this->get('date'); ?>">
+                <div class="input-group-append">
+                    <button class="btn btn-md btn-outline-default m-0 px-3 py-2 z-depth-0 waves-effect" onclick='window.location.href = "./index.php?task=display&date="+$("#inputDate").val()' type="button" id="button-addon2">IDŹ</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="cd-schedule loading">
         <div class="timeline">
             <ul>

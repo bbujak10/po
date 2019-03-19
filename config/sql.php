@@ -8,6 +8,6 @@
 
 $host = 'localhost';
 $username = 'root';
-$password = '';
+$password = 'password';
 $dbname = 'po';
 

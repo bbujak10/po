@@ -28,11 +28,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="indexDisplay.html.php">Przeglądaj rezerwacje <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?task=display">Przeglądaj rezerwacje <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="makeDisplay.html.php">Rezerwuj kort</a>
+                    <a class="nav-link" href="index.php?task=make">Rezerwuj kort</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Edytuj rezerwacje</a>
@@ -40,7 +40,7 @@
             </ul>
             <ul class="navbar-nav nav-flex-icons">
                 <li class="nav-item">
-                    <a class="nav-link">Niezalogowany <i class="fa fa-user"></i></a>
+                    <a href="index.php?task=login" class="nav-link"><?php if(isset($_SESSION['uid'])) echo $_SESSION['username']; else echo "Niezalogowany"; ?> <i class="fa fa-user"></i></a>
                 </li>
             </ul>
         </div>

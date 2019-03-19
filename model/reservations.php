@@ -23,6 +23,15 @@ class ReservationsModel extends Model{
     public function addNew($court, $date, $timeFrom, $timeTo, $coachSelect = 'NULL'){
         $this->insert('rezerwacje', "nr_kortu, czas_od, czas_do, uzytkownik_ID, trener_ID", $court.", '".$date." ".$timeFrom."', '".$date." ".$timeTo."', 1, ".$coachSelect);
     }
+    public function conflictingTimes($fromNewTime, $toNewTime, $fromDB, $toDB){
+        /* conflictingTimes - checkes if time span from $formNewTime to $toNewTime doesn't overlap or conflict with time span form DB($formDB - $toDB)*/
+        if(($toNewTime-$fromNewTime) < 1) throw new OutOfRangeException();
+        if($fromNewTime > $fromDB AND $fromNewTime < $toDB) return true;
+        else if($toNewTime > $fromDB AND $toNewTime < $toDB) return true;
+        else if ($fromNewTime == $fromDB AND $toNewTime == $toDB) return true;
+        else if ($fromNewTime < $fromDB AND $toNewTime > $toDB) return true;
+        return false;
+    }
     public function detectConflict($court, $date, $timeFrom, $timeTo){
         $year = $date[0].$date[1].$date[2].$date[3];
         $month = $date[5].$date[6];
@@ -39,11 +48,10 @@ class ReservationsModel extends Model{
                 $toDB = floatval($row['godz_do']);
                 if($row['min_do'] == '30') $toDB += 0.5;
 
-                if($fromForm >= $fromDB AND $fromForm <= $toDB) return -1;
-                else if($toForm >= $fromDB AND $toForm <= $toDB) return -1;
-                else return 0;
+                if ($this->conflictingTimes($fromForm, $toForm, $fromDB, $toDB)) return -1;
             }
         }
+        return 0;
     }
     public function detectCoachConflict($date, $timeFrom, $timeTo, $coachSelect){
         $year = $date[0].$date[1].$date[2].$date[3];
@@ -61,10 +69,11 @@ class ReservationsModel extends Model{
                 $toDB = floatval($row['godz_do']);
                 if($row['min_do'] == '30') $toDB += 0.5;
 
-                if($fromForm >= $fromDB AND $fromForm <= $toDB) return -1;
-                else if($toForm >= $fromDB AND $toForm <= $toDB) return -1;
-                else return 0;
+                if($fromForm > $fromDB AND $fromForm < $toDB) return -1;
+                else if($toForm > $fromDB AND $toForm < $toDB) return -1;
+                else if ($fromForm == $fromDB AND $toForm == $toDB) return -1;
             }
         }
+        return 0;
     }
 }

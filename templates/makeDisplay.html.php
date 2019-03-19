@@ -31,10 +31,10 @@ $step = $this->get('step');
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="indexDisplay.html.php">Przeglądaj rezerwacje <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.php?task=display">Przeglądaj rezerwacje <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="makeDisplay.html.php">Rezerwuj kort</a>
+                        <a class="nav-link" href="index.php?=task=make">Rezerwuj kort</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Edytuj rezerwacje</a>
@@ -42,7 +42,7 @@ $step = $this->get('step');
                 </ul>
                 <ul class="navbar-nav nav-flex-icons">
                     <li class="nav-item">
-                        <a class="nav-link">Niezalogowany <i class="fa fa-user"></i></a>
+                        <a href="index.php?task=login" class="nav-link"><?php if(isset($_SESSION['uid'])) echo $_SESSION['username']; else echo "Niezalogowany"; ?> <i class="fa fa-user"></i></a>
                     </li>
                 </ul>
             </div>
@@ -192,6 +192,7 @@ $step = $this->get('step');
                 else{
                     echo $coachSelect;
                 }?><br>
+                Cena: <?php echo $_SESSION['price']; ?><br>
                 <label class="col-md-2 control-label lab-pd-0 mt-5">Płatność za rezerwacje:</label>
                 <div class="container">
                     <button class="btn btn-light-blue active btn-block my-4 waves-effect btn-payment" type="submit" disabled>Zapłać teraz</button>
@@ -221,7 +222,8 @@ $step = $this->get('step');
             }
             else{
                 echo $coachSelect;
-            }?><br><br><br>
+            }?><br>
+            Cena: <?php echo $_SESSION['price']; ?><br><br><br>
             <button type="button" class="btn btn-primary" onclick="$(location).attr('href', 'index.php?task=display')">
                 Zakończ
             </button>
